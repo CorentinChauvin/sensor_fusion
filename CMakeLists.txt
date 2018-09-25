@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(SLAM_task)
+project(sensor_fusion)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -156,7 +156,8 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 # install(PROGRAMS
-#   scripts/my_python_script
+#   src/data_publisher.py
+#
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
@@ -175,9 +176,11 @@ include_directories(
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
+# install(
+# 	DIRECTORY
+#   data
+# 	launch
+#
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 

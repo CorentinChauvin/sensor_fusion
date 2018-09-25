@@ -1,0 +1,22 @@
+<launch>
+	<!-- Data publisher -->
+	<node name="data_publisher" type="data_publisher.py" pkg="sensor_fusion" output="screen">
+		<param name="file_path" value="$(find sensor_fusion)/data/data.mat" type="string" />
+
+		<param name="cov_gyro" value="0.04" type="double" />
+		<param name="cov_acc" value="2.5e-5" type="double" />
+		<param name="cov_gnss" value="6.25" type="double" />
+		<param name="cov_odom" value="0.01" type="double" />
+	</node>
+
+	<!-- Localisation -->
+	<rosparam file="$(find sensor_fusion)/config/robot_localization.yaml" command="load"/>
+
+	<node name="ukf_odom" type="ukf_localization_node" pkg="robot_localization">
+		<remap from="/odometry/filtered" to="/odom_filtered" />
+	</node>
+
+	<node name="ukf_map" type="ukf_localization_node" pkg="robot_localization">
+		<remap from="/odometry/filtered" to="/odom_final" />
+	</node>
+</launch>

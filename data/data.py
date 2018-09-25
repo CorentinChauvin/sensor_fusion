@@ -73,7 +73,7 @@
 import scipy.io as sio
 mat = sio.loadmat('data.mat')
 
-mat['in_data']['IMU'][0][0]['t'][0][0]
+mat['in_data']['IMU'][0][0]['t'][0][0][k][0]
 mat['in_data']['IMU'][0][0]['acc'][0][0][0]     # linear acc x
 mat['in_data']['IMU'][0][0]['acc'][0][0][0]     # linear acc y
 mat['in_data']['IMU'][0][0]['acc'][0][0][0]     # linear acc z
