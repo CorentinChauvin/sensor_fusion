@@ -86,7 +86,7 @@ if __name__ == '__main__':
             dt = msg.header.stamp.to_sec() - gnss_data[k-1].header.stamp.to_sec()
 
             if float(d)/dt > minimal_speed:
-                msg.pose.covariance[35] = (cov_gnss*dx)**2 + (cov_gnss*dy)**2 / d
+                msg.pose.covariance[35] = (cov_gnss*dx)**2 + (cov_gnss*dy)**2 / d  # atan differentiated
             else:
                 msg.pose.covariance[35] = 10**9
         else:
