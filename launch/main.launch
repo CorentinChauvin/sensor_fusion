@@ -2,6 +2,7 @@
 	<!-- Data publisher -->
 	<node name="data_publisher" type="data_publisher.py" pkg="sensor_fusion" output="screen">
 		<param name="file_path" value="$(find sensor_fusion)/data/data.mat" type="string" />
+		<param name="minimal_speed" value="4.0" type="double" />
 
 		<param name="cov_gyro" value="0.04" type="double" />
 		<param name="cov_acc" value="2.5e-5" type="double" />

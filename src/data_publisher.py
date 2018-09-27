@@ -16,6 +16,7 @@ if __name__ == '__main__':
 
     # ROS parameters
     file_path = rospy.get_param('~file_path')
+    minimal_speed = rospy.get_param('~minimal_speed')   # minimal speed for taking the heading into account
     cov_gyro = rospy.get_param('~cov_gyro')
     cov_acc = rospy.get_param('~cov_acc')
     cov_gnss = rospy.get_param('~cov_gnss')
@@ -82,10 +83,12 @@ if __name__ == '__main__':
             msg.pose.pose.orientation.w = quaternion[3]
 
             d = dx**2 + dy**2
-            if d != 0:
+            dt = msg.header.stamp.to_sec() - gnss_data[k-1].header.stamp.to_sec()
+
+            if float(d)/dt > minimal_speed:
                 msg.pose.covariance[35] = (cov_gnss*dx)**2 + (cov_gnss*dy)**2 / d
             else:
-                msg.pose.covariance[35] = gnss_data[k-1].pose.covariance[35]
+                msg.pose.covariance[35] = 10**9
         else:
             msg.pose.covariance[35] = 10**9
 
